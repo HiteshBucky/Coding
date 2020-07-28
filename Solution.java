@@ -1,7 +1,7 @@
 import java.util.*;
-
 class Solution{
 	static int solve(int a[]){
+
 		HashMap<Integer, Integer> map = new HashMap<>();
 		for(int i = 0; i<a.length; i++)
 			if(map.containsKey(a[i])) map.put(a[i], map.get(a[i]) + 1);
