@@ -21,10 +21,9 @@ class Solution{
 
 		int a[] = new int[size];
 
-		for(int i = 0; i<size; i++){
+		for(int i = 0; i<size; i++)
 			a[i] = sc.nextInt();
-		}
-
+		
 		System.out.println(solve(a));
 	}
 		
