@@ -1,23 +1,49 @@
+/*
+We have a collection of stones, each stone has a positive integer weight.
+
+Each turn, we choose the two heaviest stones and smash them together.  Suppose the stones have weights x and y with x <= y.  The result of this smash is:
+
+If x == y, both stones are totally destroyed;
+If x != y, the stone of weight x is totally destroyed, and the stone of weight y has new weight y-x.
+At the end, there is at most 1 stone left.  Return the weight of this stone (or 0 if there are no stones left.)
+
+ 
+
+Example 1:
+
+Input: [2,7,4,1,8,1]
+Output: 1
+Explanation: 
+We combine 7 and 8 to get 1 so the array converts to [2,4,1,1,1] then,
+we combine 2 and 4 to get 2 so the array converts to [2,1,1,1] then,
+we combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
+we combine 1 and 1 to get 0 so the array converts to [1] then that's the value of last stone.
+*/
+
 import java.util.*;
 import java.io.*;
 
-
 class Solution{
-	public static int solve(int sum, int x) {
-		int ans = sum;
-		int temp;
-		while(sum>=x){
-			temp = sum/x;
-			ans += temp;
-			sum = (sum - x*temp) + temp;
-		}
-		return ans;
-	}
+	public static int lastStoneWeight(int[] arr) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b)-> b - a);
+        for(int x : arr)
+            pq.add(x);
+        
+        while (pq.size() > 1)
+            pq.offer(pq.poll() - pq.poll());
+        
+        return pq.poll();
+        
+    }
 	
 	public static void main(String[] args)  throws IOException {
 		Scanner sc = new Scanner(System.in);
-		int sum = sc.nextInt();
-		int x = sc.nextInt();
-		System.out.println(solve(sum, x));
-	}
+
+		int size = sc.nextInt();
+		int arr[] = new int[size];
+		for(int i = 0; i<size; i++)
+			arr[i] = sc.nextInt();
+
+		System.out.println(lastStoneWeight(arr));
+    } 
 }
